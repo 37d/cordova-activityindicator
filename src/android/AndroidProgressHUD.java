@@ -62,7 +62,7 @@ public class AndroidProgressHUD extends Dialog {
 		lp.dimAmount=0.2f;
 		dialog.getWindow().setAttributes(lp);
 		// Disable canceled on touch outside
-		dialog.setCanceledOnTouchOutside(false);
+		//dialog.setCanceledOnTouchOutside(false);
 		//dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND);
 		dialog.show();
 		return dialog;

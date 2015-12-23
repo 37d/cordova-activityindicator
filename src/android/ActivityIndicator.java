@@ -41,7 +41,7 @@ public class ActivityIndicator extends CordovaPlugin {
                     activityIndicator.dismiss();
                     activityIndicator = null;
                 }
-				activityIndicator = AndroidProgressHUD.show(ActivityIndicator.this.cordova.getActivity(), ActivityIndicator.this.text, true,true,null);
+				activityIndicator = AndroidProgressHUD.show(ActivityIndicator.this.cordova.getActivity(), ActivityIndicator.this.text, true, false, null);
 			}
 		});
 	}
