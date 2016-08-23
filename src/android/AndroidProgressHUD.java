@@ -29,16 +29,20 @@ public class AndroidProgressHUD extends Dialog {
         AnimationDrawable spinner = (AnimationDrawable) imageView.getBackground();
         spinner.start();
     }
-	
+
 	public void setMessage(CharSequence message) {
 		if(message != null && message.length() > 0) {
-			findViewById(context.getResources().getIdentifier("message", "id", context.getPackageName())).setVisibility(View.VISIBLE);			
-			TextView txt = (TextView)findViewById(context.getResources().getIdentifier("message", "id", context.getPackageName()));  
+			findViewById(context.getResources().getIdentifier("message", "id", context.getPackageName())).setVisibility(View.VISIBLE);
+			TextView txt = (TextView)findViewById(context.getResources().getIdentifier("message", "id", context.getPackageName()));
 			txt.setText(message);
 			txt.invalidate();
 		}
 	}
-	
+
+    /* Disable cancel when back button is pressed */
+	@Override
+	public void onBackPressed(){}
+
 	public static AndroidProgressHUD show(Context context, CharSequence message, boolean indeterminate, boolean cancelable,
 			OnCancelListener cancelListener) {
 					 //R.style.ProgressHUD
@@ -46,7 +50,7 @@ public class AndroidProgressHUD extends Dialog {
 		dialog.setTitle("");
 		dialog.setContentView(context.getResources().getIdentifier("progress_hud", "layout", context.getPackageName()));
 		if(message == null || message.length() == 0) {
-			dialog.findViewById(context.getResources().getIdentifier("message", "id", context.getPackageName())).setVisibility(View.GONE);			
+			dialog.findViewById(context.getResources().getIdentifier("message", "id", context.getPackageName())).setVisibility(View.GONE);
 		} else {
 			TextView txt = (TextView)dialog.findViewById(context.getResources().getIdentifier("message", "id", context.getPackageName()) );
 			txt.setText(message);
@@ -54,11 +58,13 @@ public class AndroidProgressHUD extends Dialog {
 		dialog.setCancelable(cancelable);
 		dialog.setOnCancelListener(cancelListener);
 		dialog.getWindow().getAttributes().gravity=Gravity.CENTER;
-		WindowManager.LayoutParams lp = dialog.getWindow().getAttributes();  
+		WindowManager.LayoutParams lp = dialog.getWindow().getAttributes();
 		lp.dimAmount=0.2f;
-		dialog.getWindow().setAttributes(lp); 
+		dialog.getWindow().setAttributes(lp);
+		// Disable canceled on touch outside
+		//dialog.setCanceledOnTouchOutside(false);
 		//dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND);
 		dialog.show();
 		return dialog;
-	}	
+	}
 }
